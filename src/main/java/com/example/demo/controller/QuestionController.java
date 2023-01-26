@@ -28,7 +28,7 @@ public class QuestionController {
 
     @GetMapping(value = "/new")
     public String createForm() {
-        return "/questions/write";
+        return "/questions/new/createQuestionForm";
     }
     @PostMapping(value="/new/questionList")
     public String create(AskRequestDto requestDto) {

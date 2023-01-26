@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form action="/createQuestionForm" method="get">
+
+  <table class="bd_wrt_hd bd_tb">
+
+
+    <td>
+      <select name="category" class="category">
+        <option value="">C</option>
+        <option value="1">Network</option>
+        <option value="2">Web</option>
+        <option value="3">Reversing</option>
+        <option value="4">Pwnable</option>
+        <option value="5">Crypto</option>
+        <option value="6">CTF</option>
+        <option value="7">etc</option>
+      </select>
+    </td>
+    <td width="100%">
+      <input type="text" name="title" class="title" placeholder="제목을 입력하세요">
+    </td>
+
+  </table>
+  <div class="bd_wrt_ct">
+    <textarea name="content" class="content" placeholder="내용을 입력하세요"></textarea>
+  </div>
+  <div class="bd_wrt_ft">
+    <button type="submit">등록</button>
+  </div>
+</form>
+</body>
+
+</html>
+

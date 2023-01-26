@@ -234,10 +234,12 @@ public class JpaAskRepository implements AskRepository {
         return null;
     }
 
-    @Override
+   /* @Override
     public void deleteByNo(Long no) {
         em.createQuery("delete from Ask a where a.no = :no")
                 .setParameter("no", no)
                 .executeUpdate();
     }
+
+    */
 }
