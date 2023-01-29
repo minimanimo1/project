@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/basic">
+<link rel="stylesheet" href="/static/css/board.css">
+
+<style>
+  .reply {
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+  }
+  textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #f2f2f2;
+    background-color: #f2f2f2;
+  }
+
+  .selected {
+    border: 2px solid yellow;
+    padding: 10px;
+  }
+  .left{
+    grid-column: 1/3;
+  }
+  .center {
+
+    grid-column: 2 / 3; /* spans the second column */
+  }
+  .right {
+    grid-column: 3/ 3; /* spans the third column */
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 20% 55% 25%; /* sets the width of each column */
+  }
+  .btn-group {
+    display: flex;
+  }
+  .btn-group button, .btn-group form {
+    display: inline-block;
+  }
+
+</style>
+<th:block layout:fragment="title">
+  <title>상세 페이지</title>
+</th:block>
+<body>
+<div class="grid-container">
+  <div class="left"></div>
+  <div class="center">
+    <th:block layout:fragment="content">
+      <div class="container">
+        <div>
+
+          <h1 th:text="${asks.title}"></h1>
+            <p th:utext="${@commonUtil.markdown(asks.contents)}" th:rows="4"></p>
+          <p th:text="${asks.no}"></p>
+          <p th:text="${asks.tags}"></p>
+
+
+        </div>
+      </div>
+
+    </th:block>
+    //save comment
+
+    <br/>
+    <div class="card">
+      <div class="card-header">comment list</div>
+      <ul calss="list-group">
+        <li class="list-group-item d-flex">
+            <span th:each="comment: ${comment}" th:if="${comment.selected==1}" >
+                <div id="comment_box" class="selected">
+                  <p>writer : gongchamcham </p>
+                <p th:text="${comment.commentNo}"></p>
+                    <p th:utext="${@commonUtil.markdown(comment.reply)}" th:rows="4"></p>
+                </div>
+                  <hr>
+                <br><br>
+            </span>
+
+
+
+          <span th:each="comment: ${comment}" th:if="${comment.depth==0}">
+
+
+
+
+                            <div> writer : gongchamcham" </div>
+                            <p th:text="${comment.commentNo}"></p>
+
+                    <p th:text="${comment.reply}" th:rows="4"></p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">modify</button>
+                    <form th:action="@{|/questions/comment/delete/${comment.commentNo}|}">
+
+                        <button type="submit" class="btn btn-primary">delete</button>
+                    </form>
+
+
+                        <form th:action="@{|/questions/comment/selected/${comment.commentNo}|}" method="post">
+                                <button type="submit" class="btn btn-primary">selected</button>
+                        </form>
+
+                         <form th:action="@{|/questions/comment/${asks.no}/reply|}" method="post">
+                            <input type="text" name="reply" placeholder="reply"/>
+                            <input type="hidden" name="commentGroup" th:value="${comment.commentNo}"/>
+                            <button type="submit" class="btn btn-primary">reply</button>
+                        </form>
+                    </div>
+
+                    <span th:each="reply: ${reply}" th:if="${reply.commentGroup == comment.commentNo}" class="reply">
+
+                    <div class="reply">
+                         <div> writer : gongchamcham</div>
+                            <p th:text="${reply.commentNo}"></p>
+                        <p th:utext="${@commonUtil.markdown(reply.reply)}" th:rows="4"></p>
+
+
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary">modify</button>
+                             <form th:action="@{|/questions/comment/delete/${reply.commentNo}|}">
+                                 <button type="submit" class="btn btn-primary">delete</button>
+                             </form>
+
+                            <form th:action="@{|/questions/comment/selected/${reply.commentNo}|}" method="post">
+                                <button type="submit" class="btn btn-primary">selected</button>
+                            </form>
+
+                             <form th:action="@{|/questions/comment/${asks.no}/reply|}" method="post">
+                                <input type="text" name="reply" placeholder="reply"/>
+                                <input type="hidden" name="commentGroup" th:value="${reply.commentNo}"/>
+                                <button type="submit" class="btn btn-primary">reply</button>
+                            </form>
+                        </div>
+                    </div>
+
+                     </span>
+                      <hr>
+            </span>
+
+
+        </li>
+      </ul>
+        <div class="answer-box">
+            <div id="answer-btn-bar" class="btn-group">
+                <ul id="answer-btn-row" class="answer-btn-row">
+                    <button type="button" class="up-button" id="bold-button" title="Strong <strong> Ctrl+B">
+                        <span style="background-position: 0px 0px;">B</span></button>
+                    <button class="up-button" id="italic-button" title="Emphasis <em> Ctrl+I">
+                        <span style="background-position: -20px 0px;">I</span></button>
+                    <button class="up-button" id="link-button" title="Hyperlink <a> Ctrl+L">
+                        <span style="background-position: -40px 0px;">L</span></button>
+                    <button class="up-button" id="quote-button" title="Blockquote <blockquote> Ctrl+Q">
+                        <span style="background-position: -60px 0px;">"</span>
+                    </button>
+                    <button class="up-button" id="code-button" title="Code Sample <pre><code> Ctrl+K">
+                        <span style="background-position: -80px 0px;">{}</span>
+                    </button>
+
+                    <button class="up-button" id="image-button" title="Image <img> Ctrl+G">
+                        <span style="background-position: -100px 0px;">image</span>
+                    </button>
+
+                    <button class="up-button" id="snippet-button" title="JavaScript/HTML/CSS snippet Ctrl-M">
+                        <span>snippet</span>
+                    </button>
+
+                </ul>
+
+            </div>
+        <form th:action="@{|/questions/comment/${asks.no}|}" method="post">
+          <div id="comment-write">
+                <textarea id="wmd-input" name="reply" class="wmd-input s-input bar0 js-post-body-field processed"
+                          data-editor-type="wmd" data-post-type-id="2" cols="92" rows="15"
+                          aria-labelledby="your-answer-header" tabindex="101" data-min-length=""></textarea>
+
+            <button type="submit">댓글 등록</button>
+          </div>
+        </form>
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="right"></div>
+</div>
+</body>
+
+</html>

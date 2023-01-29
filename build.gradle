@@ -26,6 +26,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.h2database:h2'
+	implementation 'org.commonmark:commonmark:0.21.0'
+	implementation 'org.commonmark:commonmark-ext-gfm-tables:0.21.0'
 
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
