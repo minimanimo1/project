@@ -45,7 +45,7 @@ public class AskService {
         Ask ask = askRepository.findByNo(no).get();
         return new AskResponseDto(ask);
     }
-    public void modify(Long no, AskRequestDto requestDto) {
+    public void edit(Long no, AskRequestDto requestDto) {
         Ask ask = askRepository.findByNo(no).get();
         ask.update(requestDto.getTitle(), requestDto.getContents(), requestDto.getTags());
     }

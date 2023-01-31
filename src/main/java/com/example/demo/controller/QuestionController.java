@@ -57,15 +57,23 @@ public class QuestionController {
 
       return "/questions/view";
     }
-    @GetMapping(value="/{no}/edit")
-    public String editForm(Model model, @PathVariable("no") Long no) {
+    @GetMapping(value="/edit/{no}")
+    public String edit(@PathVariable("no") Long no, Model model) {
         AskResponseDto ask = askService.findAsk(no);
-        model.addAttribute("ask", ask);
+        model.addAttribute("asks", ask);
         return "/questions/edit";
     }
+@PostMapping(value="/new/edit/{no}")
+    public String update(@PathVariable("no") Long no, AskRequestDto requestDto) {
+        askService.edit(no, requestDto);
+        return "redirect:/questions/questionList";
+    }
+
+
     @PostMapping(value="/delete/{no}")
     public String delete(@PathVariable("no") Long no) {
         askService.delete(no);
         return "redirect:/questions/questionList";
     }
+
 }

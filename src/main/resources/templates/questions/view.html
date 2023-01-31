@@ -58,6 +58,12 @@
 
           <p th:text="${asks.no}"></p>
           <p th:text="${asks.tags}"></p>
+            <div>
+                <form th:action="@{|/questions/edit/${asks.no}|}" th:method="get">
+
+                    <button type="submit">수정</button>
+                </form>
+            </div>
             <form th:action="@{|/questions/delete/${asks.no}|}" method="post">
               <button type="submit">삭제</button>
             </form>
