@@ -14,14 +14,19 @@
       //ask list
       <tr th:each="ask : ${asks}">
         <td>
-          <a th:text="${ask.title}" th:href="@{'/questions/'+ ${ask.no}}" ></a>
+          <a th:text="${ask.no}" th:href="@{'/questions/'+ ${ask.no}}" ></a>
         </td>
-        <td th:text="${ask.contents}"></td>
+        <td th:text="${ask.title}"></td>
         <td th:text="${ask.tags}"></td>"
       </tr>
       </tbody>
     </table>
   </div>
 </div>
+<button type="button" onclick="location.href='/questions/new'">질문 작성</button>
+<button type="button" onclick="location.href='/'">메인으로</button>
+<button type="button" onclick="location.href='/members'">회원 목록</button>
+
+
 </body>
 </html>

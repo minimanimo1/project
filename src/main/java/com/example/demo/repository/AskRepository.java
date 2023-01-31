@@ -28,5 +28,7 @@ public interface AskRepository extends JpaRepository<Ask, Long> {
    Optional<Ask> findByCreatedDate(String createdDate);
 
   List<Ask> findAll();
+
+    void delete(Ask ask);
 }
 

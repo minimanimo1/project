@@ -55,8 +55,12 @@
 
           <h1 th:text="${asks.title}"></h1>
             <p th:utext="${@commonUtil.markdown(asks.contents)}" th:rows="4"></p>
+
           <p th:text="${asks.no}"></p>
           <p th:text="${asks.tags}"></p>
+            <form th:action="@{|/questions/delete/${asks.no}|}" method="post">
+              <button type="submit">삭제</button>
+            </form>
 
 
         </div>
@@ -181,12 +185,17 @@
           </div>
         </form>
 
-      </div>
 
+
+
+      </div>
+<button type="button" class="btn btn-primary" onclick="location.href='/questions/questionList'">글 목록</button>
 
     </div>
   </div>
-  <div class="right"></div>
+  <div class="right">
+
+  </div>
 </div>
 </body>
 

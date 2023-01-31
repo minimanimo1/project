@@ -10,6 +10,7 @@ import com.example.demo.repository.CommentRepository;
 import com.example.demo.service.AskService;
 import com.example.demo.service.CommentService;
 import lombok.*;
+import org.hibernate.annotations.GeneratorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -61,5 +62,10 @@ public class QuestionController {
         AskResponseDto ask = askService.findAsk(no);
         model.addAttribute("ask", ask);
         return "/questions/edit";
+    }
+    @PostMapping(value="/delete/{no}")
+    public String delete(@PathVariable("no") Long no) {
+        askService.delete(no);
+        return "redirect:/questions/questionList";
     }
 }

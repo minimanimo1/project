@@ -4,6 +4,7 @@ import com.example.demo.controller.AskForm;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.repository.query.Param;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +18,8 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
+
+
 public class Ask extends TimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +41,5 @@ public class Ask extends TimeEntity {
         this.contents = contents;
         this.tags = tags;
     }
+
 }
