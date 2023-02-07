@@ -28,6 +28,7 @@ $(document).ready(function() {
     });
 
     $('.summernote').summernote({
+        height : 500,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'italic', 'underline', 'clear']],
