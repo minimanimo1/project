@@ -4,6 +4,7 @@ import com.example.demo.controller.AskForm;
 import com.example.demo.domain.Ask;
 import com.example.demo.dto.AskRequestDto;
 import com.example.demo.dto.AskResponseDto;
+import com.example.demo.dto.CommentRequestDto;
 import com.example.demo.repository.AskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class AskService {
     public AskService(AskRepository askRepository) {
         this.askRepository = askRepository;
     }
+
 
     public Long write(AskRequestDto dto) {
         Ask ask = dto.toEntity();
